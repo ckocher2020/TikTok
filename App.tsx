@@ -5,11 +5,11 @@
  */
 
 import React from 'react';
-import {View} from 'react-native';
-import VideoList from 'components/VideoList';
+import { View } from 'react-native';
+import VideoList from './components/VideoList';
 import Animated from 'react-native-reanimated';
 
-export const Parent = () => {
+export const App = () => {
   // Create an "y" animated value and pass it down to the children
   const itemNumber = new Animated.Value(0);
 

@@ -5,19 +5,25 @@
  */
 
 import React from 'react';
-import { View } from 'react-native';
-import VideoList from './components/VideoList';
+import { View, StyleSheet } from 'react-native';
+import VideoList from './src/components/VideoList';
 import Animated from 'react-native-reanimated';
 
 export const App = () => {
-  // Create an "y" animated value and pass it down to the children
   const itemNumber = new Animated.Value(0);
 
   return (
-    <View>
+    <View style={styles.container}>
       <VideoList itemNumber={itemNumber} />
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    width: '100%',
+    height: '100%'
+  }
+});
 
 export default App;

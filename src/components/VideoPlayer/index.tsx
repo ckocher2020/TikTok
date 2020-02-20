@@ -1,26 +1,51 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { StyleSheet, Dimensions } from 'react-native';
-import Video from 'react-native-video';
+import VideoPlayer from 'react-native-video-player';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
-// Within your render function, assuming you have a file called
-// "background.mp4" in your project. You can include multiple videos
-// on a single screen if you like.
 type VideoBoxProps = {
-  source: number;
+  vimeoId: number | string;
+};
+
+/* prettier-ignore */
+type VideoType = number | {
+  uri: string
 };
 
 const VideoBox = (props: VideoBoxProps) => {
   const playerRef = useRef(null);
+  const [vimeoInfo, setVimeoInfo] = useState({
+    thumbnailUrl: '',
+    videoUrl: '',
+    video: {} as any
+  });
+
+  useEffect(() => {
+    fetch(`https://player.vimeo.com/video/${props.vimeoId}/config`)
+      .then(res => res.json())
+      .then(res =>
+        setVimeoInfo({
+          thumbnailUrl: res.video.thumbs['640'],
+          videoUrl:
+            res.request.files.hls.cdns[res.request.files.hls.default_cdn].url,
+          video: res.video
+        })
+      );
+  }, [props.vimeoId]);
+
+  if (!vimeoInfo.videoUrl.length) return null;
 
   return (
-    <Video
-      source={props.source} // Can be a URL or a local file.
+    <VideoPlayer
+      endWithThumbnail
+      video={{ uri: vimeoInfo.videoUrl }}
+      videoWidth={SCREEN_WIDTH}
+      videoHeight={SCREEN_HEIGHT * 0.98}
+      thumbnail={{ uri: vimeoInfo.thumbnailUrl }}
+      duration={vimeoInfo.video.duration}
       ref={playerRef}
-      resizeMode="stretch"
-      style={styles.scrollPage}
     />
   );
 };

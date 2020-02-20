@@ -10,11 +10,9 @@ import VideoList from './src/components/VideoList';
 import Animated from 'react-native-reanimated';
 
 export const App = () => {
-  const itemNumber = new Animated.Value(0);
-
   return (
     <View style={styles.container}>
-      <VideoList itemNumber={itemNumber} />
+      <VideoList />
     </View>
   );
 };

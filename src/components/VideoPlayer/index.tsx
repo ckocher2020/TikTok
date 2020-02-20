@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { StyleSheet, Dimensions } from 'react-native';
+import { StyleSheet, Dimensions, View } from 'react-native';
 import VideoPlayer from 'react-native-video-player';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -7,11 +7,6 @@ const SCREEN_HEIGHT = Dimensions.get('window').height;
 
 type VideoBoxProps = {
   vimeoId: number | string;
-};
-
-/* prettier-ignore */
-type VideoType = number | {
-  uri: string
 };
 
 const VideoBox = (props: VideoBoxProps) => {
@@ -46,16 +41,13 @@ const VideoBox = (props: VideoBoxProps) => {
       thumbnail={{ uri: vimeoInfo.thumbnailUrl }}
       duration={vimeoInfo.video.duration}
       ref={playerRef}
+      style={styles.container}
     />
   );
 };
 
 var styles = StyleSheet.create({
-  scrollPage: {
-    width: SCREEN_WIDTH,
-    height: SCREEN_HEIGHT,
-    padding: 0
-  }
+  container: {}
 });
 
 export default VideoBox;

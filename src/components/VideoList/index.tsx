@@ -24,11 +24,7 @@ const VideoList = () => {
       <Animated.ScrollView
         onScroll={onScroll({ y: itemNumber })}
         scrollEventThrottle={16}
-        contentContainerStyle={{
-          paddingTop: 0,
-          width: '100%',
-          height: '100%'
-        }}
+        contentContainerStyle={{}}
       >
         {vimeoIds.map(vimeoId => (
           <VideoPlayer vimeoId={vimeoId} key={vimeoId} />

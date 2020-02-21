@@ -5,8 +5,8 @@ import {
   NativeSyntheticEvent,
   NativeScrollEvent
 } from 'react-native';
-import { SCREEN_HEIGHT, vimeoIds } from '../../utils/constants';
 import Animated from 'react-native-reanimated';
+import { SCREEN_HEIGHT, vimeoIds, DELTA } from '../../utils/constants';
 import VideoPlayer from '../VideoPlayer';
 
 type VideoListProps = {
@@ -21,9 +21,8 @@ const VideoList = (props: VideoListProps) => {
   const scrollViewRef = useRef({} as any);
 
   const handleScrollEnd = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
-    const newIndex = Math.round(
-      event.nativeEvent.contentOffset.y / SCREEN_HEIGHT
-    );
+    const newFloatIndex = event.nativeEvent.contentOffset.y / SCREEN_HEIGHT;
+    let newIndex = Math.round(newFloatIndex);
 
     handleChangeVideoIndex(newIndex);
 

@@ -2,23 +2,20 @@ import React from 'react';
 import { View, StyleSheet, Text, Image } from 'react-native';
 import { CommentType } from '../../utils/types';
 
-const CommentItem = ({ comment }: { comment: CommentType }) => {
-  console.log(comment);
-  return (
-    <View style={styles.container}>
-      <View style={styles.avatarContainer}>
-        <Image
-          style={styles.avatarImage}
-          source={require('../../../assets/avatar.png')}
-        />
-      </View>
-      <View style={styles.commentContainer}>
-        <Text style={styles.commentText}>{comment.content}</Text>
-        <Text style={styles.dateText}>{comment.date}</Text>
-      </View>
+const CommentItem = ({ comment }: { comment: CommentType }) => (
+  <View style={styles.container}>
+    <View style={styles.avatarContainer}>
+      <Image
+        style={styles.avatarImage}
+        source={require('../../../assets/avatar.png')}
+      />
     </View>
-  );
-};
+    <View style={styles.commentContainer}>
+      <Text style={styles.commentText}>{comment.content}</Text>
+      <Text style={styles.dateText}>{comment.date}</Text>
+    </View>
+  </View>
+);
 
 const styles = StyleSheet.create({
   container: {

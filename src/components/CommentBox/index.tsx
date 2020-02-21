@@ -6,8 +6,8 @@ import {
   TouchableOpacity,
   TextInput
 } from 'react-native';
-import { CommentType } from '../../utils/types';
 import Animated from 'react-native-reanimated';
+import { CommentType } from '../../utils/types';
 import CommentItem from '../CommentItem';
 
 type CommentBoxProps = {
@@ -26,6 +26,12 @@ const CommentBox = (props: CommentBoxProps) => {
 
   useEffect(() => {
     setIsCommentBoxVisable(videoComments && videoComments.length > 0);
+    if (!commentListRef.current || !commentListRef.current.getNode) {
+      return;
+    }
+    commentListRef.current.getNode().scrollToEnd({
+      animated: true
+    });
   }, [videoComments]);
 
   const handleChangeComment = (newComment: string) => {
@@ -49,7 +55,7 @@ const CommentBox = (props: CommentBoxProps) => {
 
   return (
     <View
-      style={{ ...styles.container, height: isCommentBoxVisable ? 200 : 51 }}
+      style={{ ...styles.container, height: isCommentBoxVisable ? 200 : 45 }}
     >
       {isCommentBoxVisable && (
         <View style={styles.commentListBox}>
@@ -102,17 +108,19 @@ const styles = StyleSheet.create({
   container: {
     position: 'absolute',
     bottom: 0,
+    paddingTop: 8,
     height: 200,
     zIndex: 2,
-    width: '100%'
+    width: '100%',
+    backgroundColor: 'rgba(255, 255, 255, 1)'
   },
   commentListBox: {
     flex: 1,
-    marginBottom: 50
+    marginBottom: 45
   },
   commentInputContainer: {
     position: 'absolute',
-    bottom: 6,
+    bottom: 0,
     width: '100%',
     height: 45,
     zIndex: 3,
@@ -120,7 +128,7 @@ const styles = StyleSheet.create({
   },
   commentInput: {
     flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.2)',
+    backgroundColor: 'rgba(255, 255, 255, 0.1)',
     paddingHorizontal: 10,
     fontSize: 16
   },
@@ -137,7 +145,7 @@ const styles = StyleSheet.create({
     width: 50,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0)'
+    backgroundColor: 'rgba(255, 255, 255, 0.1)'
   },
   commentsButtonIcon: {
     width: 45,

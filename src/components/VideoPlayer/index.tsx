@@ -1,10 +1,8 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { StyleSheet, Dimensions, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import VideoPlayer from 'react-native-video-player';
 import Animated from 'react-native-reanimated';
-
-const SCREEN_WIDTH = Dimensions.get('window').width;
-const SCREEN_HEIGHT = Dimensions.get('window').height;
+import { SCREEN_HEIGHT, SCREEN_WIDTH } from '../../utils/constants';
 
 type VideoBoxProps = {
   index: number;

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { vimeoIds } from '../../utils/constants';
-import { CommentType } from '../../utils/types';
-import VideoList from '../VideoList';
-import CommentBox from '../CommentBox';
+import { vimeoIds } from '../utils/constants';
+import { CommentType } from '../utils/types';
+import VideoList from '../components/VideoList';
+import CommentBox from '../components/CommentBox';
 import moment from 'moment';
 
 const Screen = () => {

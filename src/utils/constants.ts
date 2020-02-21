@@ -13,3 +13,5 @@ export const vimeoIds = [
   392619331,
   392619490
 ];
+
+export const DELTA = 0.25;

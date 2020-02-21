@@ -5,8 +5,8 @@
  */
 
 import React from 'react';
-import { View, StyleSheet, Dimensions } from 'react-native';
-import Screen from './src/components/Screen';
+import { View, StyleSheet } from 'react-native';
+import Screen from './src/Screen';
 
 export const App = () => {
   return (

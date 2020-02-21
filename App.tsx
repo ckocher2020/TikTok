@@ -6,12 +6,12 @@
 
 import React from 'react';
 import { View, StyleSheet, Dimensions } from 'react-native';
-import VideoList from './src/components/VideoList';
+import Screen from './src/components/Screen';
 
 export const App = () => {
   return (
     <View style={styles.container}>
-      <VideoList />
+      <Screen />
     </View>
   );
 };

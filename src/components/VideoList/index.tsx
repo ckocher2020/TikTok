@@ -1,27 +1,31 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useRef } from 'react';
 import {
   StyleSheet,
   View,
   NativeSyntheticEvent,
   NativeScrollEvent
 } from 'react-native';
-import { SCREEN_WIDTH, SCREEN_HEIGHT, vimeoIds } from '../../utils/constants';
+import { SCREEN_HEIGHT, vimeoIds } from '../../utils/constants';
 import Animated from 'react-native-reanimated';
 import VideoPlayer from '../VideoPlayer';
 
-type VideoListProps = {};
+type VideoListProps = {
+  currentVideoIndex: number;
+  handleChangeVideoIndex: Function;
+};
 
-const VideoList = () => {
+const VideoList = (props: VideoListProps) => {
+  const { currentVideoIndex, handleChangeVideoIndex } = props;
+
   const offsetY = new Animated.Value(0);
   const scrollViewRef = useRef({} as any);
-  const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
 
   const handleScrollEnd = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
     const newIndex = Math.round(
       event.nativeEvent.contentOffset.y / SCREEN_HEIGHT
     );
 
-    setCurrentVideoIndex(newIndex);
+    handleChangeVideoIndex(newIndex);
 
     scrollViewRef.current.getNode().scrollTo({
       x: 0,

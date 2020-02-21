@@ -1,0 +1,145 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CommentItem renders correctly with defaults 1`] = `
+<View
+  style={
+    Object {
+      "flexDirection": "row",
+      "marginBottom": 6,
+      "paddingHorizontal": 10,
+      "width": "100%",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "height": 40,
+        "justifyContent": "center",
+        "width": 40,
+      }
+    }
+  >
+    <Image
+      source={
+        Object {
+          "testUri": "../../../assets/avatar.png",
+        }
+      }
+      style={
+        Object {
+          "borderRadius": 20,
+          "height": 40,
+          "width": 40,
+        }
+      }
+    />
+  </View>
+  <View
+    style={
+      Object {
+        "alignItems": "baseline",
+        "flex": 1,
+        "flexDirection": "row",
+        "paddingLeft": 5,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "black",
+          "flex": 1,
+          "fontSize": 18,
+        }
+      }
+    >
+      Comment Item Jest
+    </Text>
+    <Text
+      style={
+        Object {
+          "alignSelf": "flex-end",
+          "color": "rgba(0, 0, 0, 0.5)",
+          "marginLeft": 10,
+        }
+      }
+    >
+      6: 30 am
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`renders correctly with defaults 1`] = `
+<View
+  style={
+    Object {
+      "flexDirection": "row",
+      "marginBottom": 6,
+      "paddingHorizontal": 10,
+      "width": "100%",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "height": 40,
+        "justifyContent": "center",
+        "width": 40,
+      }
+    }
+  >
+    <Image
+      source={
+        Object {
+          "testUri": "../../../assets/avatar.png",
+        }
+      }
+      style={
+        Object {
+          "borderRadius": 20,
+          "height": 40,
+          "width": 40,
+        }
+      }
+    />
+  </View>
+  <View
+    style={
+      Object {
+        "alignItems": "baseline",
+        "flex": 1,
+        "flexDirection": "row",
+        "paddingLeft": 5,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "black",
+          "flex": 1,
+          "fontSize": 18,
+        }
+      }
+    >
+      Comment Item Jest
+    </Text>
+    <Text
+      style={
+        Object {
+          "alignSelf": "flex-end",
+          "color": "rgba(0, 0, 0, 0.5)",
+          "marginLeft": 10,
+        }
+      }
+    >
+      6: 30 am
+    </Text>
+  </View>
+</View>
+`;

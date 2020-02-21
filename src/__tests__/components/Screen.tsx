@@ -3,7 +3,7 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import Screen from '../../components/Screen';
 
-it('renders correctly with defaults', () => {
+it('Screen renders correctly with defaults', () => {
   const screen = renderer.create(<Screen />).toJSON();
   expect(screen).toMatchSnapshot();
 });

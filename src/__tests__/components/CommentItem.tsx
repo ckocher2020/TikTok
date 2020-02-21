@@ -3,7 +3,7 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import CommentItem from '../../components/CommentItem';
 
-it('renders correctly with defaults', () => {
+it('CommentItem renders correctly with defaults', () => {
   const comment = {
     sender: 'James',
     date: '6: 30 am',
@@ -12,5 +12,6 @@ it('renders correctly with defaults', () => {
   const commentItem = renderer
     .create(<CommentItem comment={comment} />)
     .toJSON();
+
   expect(commentItem).toMatchSnapshot();
 });

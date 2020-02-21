@@ -76,11 +76,38 @@ const styles = StyleSheet.create({
     height: '100%',
     width: '100%'
   },
-  commentListBox,
-  commentInputContainer,
-  commentInput,
-  commentSendButton,
-  commentSendButtonIcon
+  commentListBox: {
+    flex: 1,
+    marginBottom: 40
+  },
+  commentInputContainer: {
+    position: 'absolute',
+    bottom: 0,
+    height: 40,
+    width: '100%'
+  },
+  commentInput: {
+    flex: 1,
+    height: 40,
+    backgroundColor: 'rgba(0, 0, 0, 0.1)',
+    borderRadius: 5,
+    paddingLeft: 10,
+    paddingRight: 10,
+    fontSize: 14
+  },
+  commentSendButton: {
+    width: 80,
+    height: 40,
+    marginLeft: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'rgb(33, 150, 243)'
+  },
+  commentSendButtonIcon: {
+    fontSize: 16,
+    fontWeight: '700',
+    color: 'white'
+  }
 });
 
 export default CommentBox;

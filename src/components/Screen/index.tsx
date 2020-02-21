@@ -1,27 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { SCREEN_HEIGHT, vimeoIds } from '../../utils/constants';
-import { CommentType, VideoCommentsType } from '../../utils/types';
+import { CommentType } from '../../utils/types';
 import VideoList from '../VideoList';
 import CommentBox from '../CommentBox';
 
 const Screen = () => {
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
-  const [videoComments, setVideoComments] = useState([] as VideoCommentsType[]);
+  const [videoComments, setVideoComments] = useState({} as any);
 
   const handleChangeVideoIndex = (index: number) => {
     setCurrentVideoIndex(index);
   };
 
+  const handleAddVideoComment = (vimeoId: number, comment: string) => {
+    setVideoComments({
+      ...videoComments,
+      [vimeoId]: [...videoComments[vimeoId], comment]
+    });
+  };
+
   useEffect(() => {
-    const newComments = vimeoIds.map(vimeoId => {
-      return {
-        vimeoId,
-        comments: []
-      } as VideoCommentsType;
+    const newComments = {} as any;
+    vimeoIds.map(vimeoId => {
+      newComments[vimeoId] = [];
     });
     setVideoComments(newComments);
-  });
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -29,7 +34,11 @@ const Screen = () => {
         currentVideoIndex={currentVideoIndex}
         handleChangeVideoIndex={handleChangeVideoIndex}
       />
-      <CommentBox videoComments={videoComments[currentVideoIndex]} />
+      <CommentBox
+        vimeoId={vimeoIds[currentVideoIndex]}
+        videoComments={videoComments[vimeoIds[currentVideoIndex]]}
+        addVideoComment={handleAddVideoComment}
+      />
     </View>
   );
 };

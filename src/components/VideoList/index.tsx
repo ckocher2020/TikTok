@@ -41,7 +41,7 @@ const VideoList = (props: VideoListProps) => {
           [{ nativeEvent: { contentOffset: { y: offsetY } } }],
           { useNativeDriver: true }
         )}
-        scrollEventThrottle={200}
+        scrollEventThrottle={16}
         onMomentumScrollEnd={handleScrollEnd}
         onScrollEndDrag={handleScrollEnd}
         ref={scrollViewRef}

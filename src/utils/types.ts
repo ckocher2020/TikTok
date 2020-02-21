@@ -3,8 +3,3 @@ export type CommentType = {
   date: string;
   content: string;
 };
-
-export type VideoCommentsType = {
-  vimeoId: number;
-  comments: Array<CommentType>;
-};

@@ -1,13 +1,11 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import {
   StyleSheet,
   View,
   Image,
   TouchableOpacity,
-  Text,
   TextInput
 } from 'react-native';
-import { Content } from 'native-base';
 import { CommentType } from '../../utils/types';
 import Animated from 'react-native-reanimated';
 import CommentItem from '../CommentItem';
@@ -26,6 +24,10 @@ const CommentBox = (props: CommentBoxProps) => {
   const [comment, setComment] = useState('');
   const [isCommentBoxVisable, setIsCommentBoxVisable] = useState(false);
 
+  useEffect(() => {
+    setIsCommentBoxVisable(videoComments.length > 0);
+  }, [videoComments]);
+
   const handleChangeComment = (newComment: string) => {
     setComment(newComment);
   };
@@ -35,9 +37,7 @@ const CommentBox = (props: CommentBoxProps) => {
       return;
     }
     addVideoComment(vimeoId, comment);
-    if (!isCommentBoxVisable) {
-      setIsCommentBoxVisable(true);
-    }
+    setIsCommentBoxVisable(true);
     setComment('');
   };
 

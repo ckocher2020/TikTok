@@ -1,24 +1,20 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { View, StyleSheet, Text, Image } from 'react-native';
 import { CommentType } from '../../utils/types';
 
 const CommentItem = ({ comment }: { comment: CommentType }) => {
+  console.log(comment);
   return (
     <View style={styles.container}>
       <View style={styles.avatarContainer}>
         <Image
-          style={styles.avatar}
+          style={styles.avatarImage}
           source={require('../../../assets/avatar.png')}
         />
       </View>
       <View style={styles.commentContainer}>
-        <View style={styles.titleSection}>
-          <Text style={styles.nameText}>{comment.sender}</Text>
-          <Text style={styles.dateText}>{comment.date}</Text>
-        </View>
-        <View style={styles.textSection}>
-          <Text style={styles.commentText}>{comment.content}</Text>
-        </View>
+        <Text style={styles.commentText}>{comment.content}</Text>
+        <Text style={styles.dateText}>{comment.date}</Text>
       </View>
     </View>
   );
@@ -27,43 +23,36 @@ const CommentItem = ({ comment }: { comment: CommentType }) => {
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    paddingLeft: 10,
-    paddingRight: 10,
-    marginBottom: 15,
-    flexDirection: 'row'
+    paddingHorizontal: 10,
+    flexDirection: 'row',
+    marginBottom: 6
   },
   avatarContainer: {
-    width: 50,
+    width: 40,
     height: 40,
     alignItems: 'center',
     justifyContent: 'center'
   },
-  avatar: {
+  avatarImage: {
     width: 40,
     height: 40,
-    borderRadius: 20,
-    backgroundColor: 'rgba(0, 0, 0, 0.3)'
+    borderRadius: 20
   },
   commentContainer: {
-    flex: 1
-  },
-  titleSection: {
+    flex: 1,
+    paddingLeft: 5,
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'baseline'
   },
-  nameText: {
-    fontWeight: '700'
+  commentText: {
+    flex: 1,
+    fontSize: 18,
+    color: 'black'
   },
   dateText: {
     marginLeft: 10,
-    color: 'rgba(0, 0, 0, 0.5)'
-  },
-  textSection: {
-    padding: 5
-  },
-  commentText: {
-    fontSize: 14,
-    color: 'black'
+    color: 'rgba(0, 0, 0, 0.5)',
+    alignSelf: 'flex-end'
   }
 });
 

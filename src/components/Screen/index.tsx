@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { SCREEN_HEIGHT, vimeoIds } from '../../utils/constants';
+import { vimeoIds } from '../../utils/constants';
 import { CommentType } from '../../utils/types';
 import VideoList from '../VideoList';
 import CommentBox from '../CommentBox';
+import moment from 'moment';
 
 const Screen = () => {
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
@@ -16,7 +17,14 @@ const Screen = () => {
   const handleAddVideoComment = (vimeoId: number, comment: string) => {
     setVideoComments({
       ...videoComments,
-      [vimeoId]: [...videoComments[vimeoId], comment]
+      [vimeoId]: [
+        ...videoComments[vimeoId],
+        {
+          content: comment,
+          sender: 'James',
+          date: moment().format('HH:mm:ss')
+        } as CommentType
+      ]
     });
   };
 

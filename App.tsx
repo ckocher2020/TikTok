@@ -5,13 +5,10 @@
  */
 
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Dimensions } from 'react-native';
 import VideoList from './src/components/VideoList';
-import Animated from 'react-native-reanimated';
 
 export const App = () => {
-  const itemNumber = new Animated.Value(0);
-
   return (
     <View style={styles.container}>
       <VideoList />

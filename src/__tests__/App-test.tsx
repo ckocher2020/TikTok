@@ -10,3 +10,7 @@ import renderer from 'react-test-renderer';
 it('renders correctly', () => {
   renderer.create(<App />);
 });
+
+jest.mock('react-native-reanimated', () =>
+  require('react-native-reanimated/mock')
+);

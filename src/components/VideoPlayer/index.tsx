@@ -1,16 +1,21 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { StyleSheet, Dimensions, View } from 'react-native';
 import VideoPlayer from 'react-native-video-player';
+import Animated from 'react-native-reanimated';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
 type VideoBoxProps = {
+  index: number;
   vimeoId: number | string;
+  playable: boolean;
 };
 
 const VideoBox = (props: VideoBoxProps) => {
-  const playerRef = useRef(null);
+  const { playable, index, vimeoId } = props;
+
+  const playerRef = useRef({} as any);
   const [vimeoInfo, setVimeoInfo] = useState({
     thumbnailUrl: '',
     videoUrl: '',
@@ -18,7 +23,7 @@ const VideoBox = (props: VideoBoxProps) => {
   });
 
   useEffect(() => {
-    fetch(`https://player.vimeo.com/video/${props.vimeoId}/config`)
+    fetch(`https://player.vimeo.com/video/${vimeoId}/config`)
       .then(res => res.json())
       .then(res =>
         setVimeoInfo({
@@ -28,26 +33,41 @@ const VideoBox = (props: VideoBoxProps) => {
           video: res.video
         })
       );
-  }, [props.vimeoId]);
+  }, [vimeoId]);
+
+  useEffect(() => {
+    if (!playable && playerRef.current && playerRef.current.stop) {
+      if (playerRef.current.state.isPlaying) {
+        playerRef.current.stop();
+      }
+    }
+  }, [playable]);
 
   if (!vimeoInfo.videoUrl.length) return null;
 
   return (
-    <VideoPlayer
-      endWithThumbnail
-      video={{ uri: vimeoInfo.videoUrl }}
-      videoWidth={SCREEN_WIDTH}
-      videoHeight={SCREEN_HEIGHT * 0.98}
-      thumbnail={{ uri: vimeoInfo.thumbnailUrl }}
-      duration={vimeoInfo.video.duration}
-      ref={playerRef}
-      style={styles.container}
-    />
+    <View style={styles.container}>
+      <Animated.View>
+        <VideoPlayer
+          endWithThumbnail
+          video={{ uri: vimeoInfo.videoUrl }}
+          videoWidth={SCREEN_WIDTH}
+          videoHeight={SCREEN_HEIGHT}
+          thumbnail={{ uri: vimeoInfo.thumbnailUrl }}
+          duration={vimeoInfo.video.duration}
+          ref={playerRef}
+          style={styles.container}
+        />
+      </Animated.View>
+    </View>
   );
 };
 
 var styles = StyleSheet.create({
-  container: {}
+  container: {
+    width: SCREEN_WIDTH,
+    height: SCREEN_HEIGHT
+  }
 });
 
 export default VideoBox;

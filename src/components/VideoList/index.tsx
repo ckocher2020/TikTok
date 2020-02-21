@@ -1,33 +1,54 @@
-import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
-import { onScroll } from 'react-native-redash';
+import React, { useState, useRef, useEffect } from 'react';
+import {
+  StyleSheet,
+  View,
+  NativeSyntheticEvent,
+  NativeScrollEvent
+} from 'react-native';
+import { SCREEN_WIDTH, SCREEN_HEIGHT, vimeoIds } from '../../utils/constants';
 import Animated from 'react-native-reanimated';
 import VideoPlayer from '../VideoPlayer';
 
 type VideoListProps = {};
 
 const VideoList = () => {
-  const itemNumber = new Animated.Value(0);
-  const vimeoIds = [
-    392619248,
-    392619263,
-    392619282,
-    392619298,
-    392619309,
-    392619319,
-    392619331,
-    392619490
-  ];
+  const offsetY = new Animated.Value(0);
+  const scrollViewRef = useRef({} as any);
+  const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
+
+  const handleScrollEnd = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
+    const newIndex = Math.round(
+      event.nativeEvent.contentOffset.y / SCREEN_HEIGHT
+    );
+
+    setCurrentVideoIndex(newIndex);
+
+    scrollViewRef.current.getNode().scrollTo({
+      x: 0,
+      y: newIndex * SCREEN_HEIGHT,
+      animated: true
+    });
+  };
 
   return (
     <View style={styles.container}>
       <Animated.ScrollView
-        onScroll={onScroll({ y: itemNumber })}
-        scrollEventThrottle={16}
-        contentContainerStyle={{}}
+        onScroll={Animated.event(
+          [{ nativeEvent: { contentOffset: { y: offsetY } } }],
+          { useNativeDriver: true }
+        )}
+        scrollEventThrottle={200}
+        onMomentumScrollEnd={handleScrollEnd}
+        onScrollEndDrag={handleScrollEnd}
+        ref={scrollViewRef}
       >
-        {vimeoIds.map(vimeoId => (
-          <VideoPlayer vimeoId={vimeoId} key={vimeoId} />
+        {vimeoIds.map((vimeoId, index) => (
+          <VideoPlayer
+            vimeoId={vimeoId}
+            key={vimeoId}
+            playable={index === currentVideoIndex}
+            index={index}
+          />
         ))}
       </Animated.ScrollView>
     </View>

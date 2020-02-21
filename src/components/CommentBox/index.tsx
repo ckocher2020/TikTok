@@ -25,7 +25,7 @@ const CommentBox = (props: CommentBoxProps) => {
   const [isCommentBoxVisable, setIsCommentBoxVisable] = useState(false);
 
   useEffect(() => {
-    setIsCommentBoxVisable(videoComments.length > 0);
+    setIsCommentBoxVisable(videoComments && videoComments.length > 0);
   }, [videoComments]);
 
   const handleChangeComment = (newComment: string) => {
